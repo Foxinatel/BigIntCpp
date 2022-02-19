@@ -3,8 +3,7 @@
 #include "../bigint.hpp"
 
 const BigInt& BigInt::operator=(BigIntConstructible auto a) {
-    BigInt temp{a};
-    this->value = temp.value;
-    this->negative = temp.negative;
+    value = a.value;
+    negative = a.negative;
     return *this;
 }

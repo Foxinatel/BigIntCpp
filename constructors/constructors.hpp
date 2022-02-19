@@ -1,7 +1,7 @@
+#pragma once
+
 #include "../bigint.hpp"
 #include "../operators/binary_arithmetic.hpp"
-
-#include <concepts>
 
 //default constructor
 inline BigInt::BigInt () {}

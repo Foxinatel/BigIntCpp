@@ -43,4 +43,6 @@ struct BigInt {
     BigInt& operator--();       // pre-decrement
     BigInt operator++(int);     // post-increment
     BigInt operator--(int);     // post-decrement
+
+    operator uint();
 };

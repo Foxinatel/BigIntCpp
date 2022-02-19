@@ -1,14 +1,15 @@
 #pragma once
 
 #include "../bigint.hpp"
-
-#include <iomanip>
+#include "./relational.hpp"
+#include "./binary_arithmetic.hpp"
 
 inline std::ostream& operator<<(std::ostream &out, BigInt num) {
-    if (num.value.size() == 0) num.value = {0};
-    out << std::hex << (num.negative?"-":"") << "0x" << num.value[num.value.size()-1];
-    for (ssize_t i = num.value.size()-2; i >= 0; --i) {
-        out << std::setw(8) << std::setfill('0') << num.value[i]; 
+    //if (num.value.size() == 0) num.value = {0};
+    std::string str = (num.negative?"-":"");
+    while (num.value.size()) {
+        str.insert(0, 1, char(num % 10 + '0'));
+        num /= 10;
     }
-    return out;
+    return out << str;
 }
