@@ -16,6 +16,18 @@ inline BigInt::BigInt (const std::integral auto n) {
     }
 }
 
+inline BigInt::BigInt(const char *chars) {
+    std::string str(chars);
+    if (str[0] == '-') negative = true;
+    const std::string numstr = negative ? str.substr(1) : str;
+    BigInt acc;
+    for (size_t i = 0; i < numstr.length(); ++i) {
+        acc *= 10;
+        acc += (numstr[i] - '0');
+    }
+    value = acc.value;
+}
+
 //constructor for strings
 inline BigInt::BigInt (const std::string str) {
     if (str[0] == '-') negative = true;

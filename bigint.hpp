@@ -22,6 +22,7 @@ struct BigInt {
 
     BigInt ();
     BigInt (const std::integral auto);
+    BigInt (const char*);
     BigInt (const std::string);
 
     //Assignment
