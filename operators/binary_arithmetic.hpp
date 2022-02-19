@@ -4,6 +4,7 @@
 #include "../bigint.hpp"
 #include "./relational.hpp"
 #include "../functions/functions.hpp"
+#include <cstddef>
 
 BigInt operator+(BigInt, BigInt);
 BigInt operator-(BigInt, BigInt);
@@ -79,14 +80,15 @@ inline BigInt operator-(BigInt a, BigInt b) {
 
 inline BigInt operator/(BigInt N, BigInt D) {
     BigInt Q, R;
-    for (size_t i = N.value.size()*32 - 1; i >= 0; --i) {
+    for (size_t i = 0; i < N.value.size()*32; ++i) {
+        const size_t index = N.value.size()*32 - i - 1;
         R *= 2;
         if (R == 0) R.value = {0};
-        R.value[0] |= ((N.value[i/32] >> (i%32)) & 1);
+        R.value[0] |= ((N.value[index/32] >> (index%32)) & 1);
         if (R >= D) {
             R -= D;
-            while (Q.value.size() <= (i/32)) Q.value.push_back(0);
-            Q.value[i/32] |= (1u << (i%32));
+            while (Q.value.size() <= (index/32)) Q.value.push_back(0);
+            Q.value[index/32] |= (1u << (index%32));
         }
     }
     return Q;
@@ -94,17 +96,17 @@ inline BigInt operator/(BigInt N, BigInt D) {
 
 inline BigInt operator%(BigInt N, BigInt D) {
     BigInt Q, R;
-    for (ssize_t i = N.value.size()*32 - 1; i >= 0; --i) {
+    for (size_t i = 0; i < N.value.size()*32; ++i) {
+        const size_t index = N.value.size()*32 - i - 1;
         R *= 2;
         if (R == 0) R.value = {0};
-        R.value[0] |= ((N.value[i/32] >> (i%32)) & 1);
+        R.value[0] |= ((N.value[index/32] >> (index%32)) & 1);
         if (R >= D) {
             R -= D;
-            while (Q.value.size() <= (i/32)) Q.value.push_back(0);
-            Q.value[i/32] |= (1u << (i%32));
+            while (Q.value.size() <= (index/32)) Q.value.push_back(0);
+            Q.value[index/32] |= (1u << (index%32));
         }
     }
-    while (R.value.size() > 0 && R.value.back() == 0) {R.value.pop_back();} //remove
     return R;
 }
 
