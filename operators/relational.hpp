@@ -9,8 +9,8 @@ inline bool operator<(const BigInt& a, const BigInt& b) {
     if (a.value.size() < b.value.size()) return !negative;
     if (a.value.size() > b.value.size()) return negative;
     for (ssize_t i = a.value.size()-1; i>=0; --i) {
-        if (a.value[i] < b.value[i]) return negative;
-        if (a.value[i] > b.value[i]) return !negative;
+        if (a.value[i] < b.value[i]) return !negative;
+        if (a.value[i] > b.value[i]) return negative;
     }
     return false;
 }
@@ -22,8 +22,8 @@ inline bool operator>(const BigInt& a, const BigInt& b) {
     if (a.value.size() > b.value.size()) return !negative;
     if (a.value.size() < b.value.size()) return negative;
     for (ssize_t i = a.value.size()-1; i>=0; --i) {
-        if (a.value[i] > b.value[i]) return negative;
-        if (a.value[i] < b.value[i]) return !negative;
+        if (a.value[i] > b.value[i]) return !negative;
+        if (a.value[i] < b.value[i]) return negative;
     }
     return false;
 }
