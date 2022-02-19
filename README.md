@@ -5,7 +5,6 @@ This new implementation makes use of a dynamic array of uint32_t, essentially al
 Additionally, operator overloading makes use of C++20 concepts to allow any type that can construct a BigInt to work with no extra configuration
 
 ## TODO
-* Change string constructor from hex to decimal
 * Change IO from hex to decimal
 * Bitwise operations ??
 * Constexpr ???
