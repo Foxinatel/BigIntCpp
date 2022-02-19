@@ -6,12 +6,6 @@
 //default constructor
 inline BigInt::BigInt () {}
 
-//copy constuctor
-inline BigInt::BigInt (const BigInt &n) {
-    negative = n.negative;
-    value = n.value;
-}
-
 //constructor for integer values
 inline BigInt::BigInt (const std::integral auto n) {
     if (n < 0) negative = true;

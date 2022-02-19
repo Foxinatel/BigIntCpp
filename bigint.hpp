@@ -21,7 +21,6 @@ struct BigInt {
     std::vector<uint32_t> value;
 
     BigInt ();
-    BigInt (const BigInt&);
     BigInt (const std::integral auto);
     BigInt (const std::string);
 
