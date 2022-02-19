@@ -41,24 +41,20 @@ inline BigInt operator+(BigInt a, BigInt b) {
 //Definitely not optimal, will revisit later
 //I wonder if there's something like Wallace trees for this
 inline BigInt operator*(BigInt a, BigInt b) {
-    std::vector<BigInt> vecpool;
-    const size_t size1 = a.value.size();
-    const size_t size2 = b.value.size();
-    for (size_t i = 0; i < size1; ++i) {
-        for (size_t j = 0; j < size2; ++j) {
-            BigInt tempvec;
-            tempvec.value.resize(i+j);
+    BigInt accumulator;
+    accumulator.negative = a.negative ^ b.negative;
+    for (size_t i = 0; i < a.value.size(); ++i) {
+        for (size_t j = 0; j < b.value.size(); ++j) {
+            BigInt temp;
+            temp.value.resize(i+j);
             uint64_t val = a.value[i]*b.value[j];
             if (val == 0) continue;
-            tempvec.value.push_back(val & 0xFFFFFFFF);
-            if (val >> 32) tempvec.value.push_back(val >> 32);
-            vecpool.push_back(tempvec);
+            temp.value.push_back(val & 0xFFFFFFFF);
+            if (val >> 32) temp.value.push_back(val >> 32);
+            accumulator += temp;
         }
     }
-    BigInt newval;
-    newval.negative = a.negative ^ b.negative;
-    for (auto elem : vecpool) newval = newval + elem;
-    return newval;
+    return accumulator;
 }
 
 inline BigInt operator-(BigInt a, BigInt b) {
