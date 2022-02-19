@@ -22,12 +22,12 @@ inline BigInt::BigInt (const std::integral auto n) {
     }
 }
 
-//For the sake of my sanity, strings are currently handled as hex
+//constructor for strings
 inline BigInt::BigInt (const std::string str) {
     if (str[0] == '-') negative = true;
     const std::string numstr = negative ? str.substr(1) : str;
     BigInt acc;
-    for (ssize_t i = str.length()-1; i>=0; --i) {
+    for (size_t i = 0; i<numstr.length(); ++i) {
         acc *= 10;
         acc += (str[i] - '0');
     }
