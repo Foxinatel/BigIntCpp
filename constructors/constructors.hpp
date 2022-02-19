@@ -27,9 +27,9 @@ inline BigInt::BigInt (const std::string str) {
     if (str[0] == '-') negative = true;
     const std::string numstr = negative ? str.substr(1) : str;
     BigInt acc;
-    for (size_t i = 0; i<numstr.length(); ++i) {
+    for (size_t i = 0; i < numstr.length(); ++i) {
         acc *= 10;
-        acc += (str[i] - '0');
+        acc += (numstr[i] - '0');
     }
     value = acc.value;
 }

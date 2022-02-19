@@ -7,7 +7,6 @@
 #include <cstddef>
 
 #include "./io_stream.hpp"
-#include <iostream>
 
 BigInt operator+(BigInt, BigInt);
 BigInt operator-(BigInt, BigInt);
@@ -47,9 +46,9 @@ inline BigInt operator*(BigInt a, BigInt b) {
         for (size_t j = 0; j < b.value.size(); ++j) {
             BigInt temp;
             temp.value.resize(i+j);
-            uint64_t val = a.value[i]*b.value[j];
+            uint64_t val = uint64_t(a.value[i])*b.value[j];
             if (val == 0) continue;
-            temp.value.push_back(val & 0xFFFFFFFF);
+            temp.value.push_back(val % (1l<<32));
             if (val >> 32) temp.value.push_back(val >> 32);
             accumulator += temp;
         }
