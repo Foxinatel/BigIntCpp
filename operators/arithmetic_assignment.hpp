@@ -11,7 +11,7 @@ BigInt& BigInt::operator+=(BigIntConstructible auto a) {
 }
 
 BigInt& BigInt::operator-=(BigIntConstructible auto a) {
-    //*this = *this - BigInt(a);
+    *this = *this - BigInt(a);
     return *this;
 }
 
@@ -21,11 +21,11 @@ BigInt& BigInt::operator*=(BigIntConstructible auto a) {
 }
 
 BigInt& BigInt::operator/=(BigIntConstructible auto a) {
-    //*this = *this / BigInt(a);
+    *this = *this / BigInt(a);
     return *this;
 }
 
 BigInt& BigInt::operator%=(BigIntConstructible auto a) {
-    //*this = *this % BigInt(a);
+    *this = *this % BigInt(a);
     return *this;
 }

@@ -68,7 +68,6 @@ inline BigInt operator-(BigInt a, BigInt b) {
         if (absb > absa) newval.negative = !newval.negative;
         const BigInt max = M_max(absa, absb);
         const BigInt min = M_min(absa, absb);
-        std::cout << '\n' << max << '\n' << min << '\n';
         bool underflow = false;
         for (size_t i = 0; i < max.value.size(); ++i) {
             const uint32_t newdig = max.value[i] -
@@ -81,17 +80,49 @@ inline BigInt operator-(BigInt a, BigInt b) {
     return newval;
 }
 
+inline BigInt operator/(BigInt N, BigInt D) {
+    BigInt Q;
+    BigInt R;
+    for (size_t i = 0; i < N.value.size()*32; ++i) {
+        R *= 2;
+        if (R.value.size() == 0) R.value = {0};
+        R.value[0] |= ((N.value[i/32] >> (31-i%32)) & 1);
+        if (R >= D) {
+            R -= D;
+            while (Q.value.size() <= (i/32)) Q.value.push_back(0);
+            Q.value[i/32] |= (1u << (31-i%32));
+        }
+    }
+    return Q;
+}
+
+inline BigInt operator%(BigInt N, BigInt D) {
+    BigInt Q;
+    BigInt R;
+    for (size_t i = 0; i < N.value.size()*32; ++i) {
+        R *= 2;
+        if (R.value.size() == 0) R.value = {0};
+        R.value[0] |= ((N.value[i/32] >> (31-i%32)) & 1);
+        if (R >= D) {
+            R -= D;
+            while (Q.value.size() <= (i/32)) Q.value.push_back(0);
+            Q.value[i/32] |= (1u << (31-i%32));
+        }
+    }
+    return R;
+}
+
 inline BigInt operator+(BigInt a, BigIntConstructible auto n) {return a + BigInt(n);}
 inline BigInt operator+(BigIntConstructible auto n, BigInt a) {return a + BigInt(n);}
 
 inline BigInt operator*(BigInt a, BigIntConstructible auto n) {return a * BigInt(n);}
 inline BigInt operator*(BigIntConstructible auto n, BigInt a) {return a * BigInt(n);}
 
-//inline BigInt operator-(BigInt a, BigIntConstructible auto n) {return a - BigInt(n);}
-//inline BigInt operator-(BigIntConstructible auto n, BigInt a) {return a - BigInt(n);}
+inline BigInt operator-(BigInt a, BigIntConstructible auto n) {return a - BigInt(n);}
+inline BigInt operator-(BigIntConstructible auto n, BigInt a) {return a - BigInt(n);}
 
-//inline BigInt operator/(BigInt a, BigIntConstructible auto n) {return a / BigInt(n);}
-//inline BigInt operator/(BigIntConstructible auto n, BigInt a) {return a / BigInt(n);}
+inline BigInt operator/(BigInt a, BigIntConstructible auto n) {return a / BigInt(n);}
+inline BigInt operator/(BigIntConstructible auto n, BigInt a) {return a / BigInt(n);}
 
-//inline BigInt operator%(BigInt a, BigIntConstructible auto n) {return a % BigInt(n);}
-//inline BigInt operator%(BigIntConstructible auto n, BigInt a) {return a % BigInt(n);}
+inline BigInt operator%(BigInt a, BigIntConstructible auto n) {return a % BigInt(n);}
+inline BigInt operator%(BigIntConstructible auto n, BigInt a) {return a % BigInt(n);}
