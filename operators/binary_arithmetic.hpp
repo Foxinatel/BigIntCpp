@@ -79,7 +79,7 @@ inline BigInt operator-(BigInt a, BigInt b) {
 
 inline BigInt operator/(BigInt N, BigInt D) {
     BigInt Q, R;
-    for (ssize_t i = N.value.size()*32 - 1; i >= 0; --i) {
+    for (size_t i = N.value.size()*32 - 1; i >= 0; --i) {
         R *= 2;
         if (R == 0) R.value = {0};
         R.value[0] |= ((N.value[i/32] >> (i%32)) & 1);
