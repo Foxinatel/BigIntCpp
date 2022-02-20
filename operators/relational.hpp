@@ -43,20 +43,20 @@ inline bool operator==(const BigInt& a, const BigInt& b) {
 inline bool operator!=(const BigInt& a, const BigInt& b) {return !(a==b);}
 
 
-bool operator<(const BigInt& a, BigIntConstructible auto n) {return a<BigInt(n);}
-bool operator<(BigIntConstructible auto n,const BigInt& a) {return BigInt(n)<a;}
+bool operator<(const BigInt& a, const BigIntConstructible auto &n) {return a<BigInt(n);}
+bool operator<(const BigIntConstructible auto &n, const BigInt& a) {return BigInt(n)<a;}
 
-bool operator>(const BigInt& a, BigIntConstructible auto n) {return a>BigInt(n);}
-bool operator>(BigIntConstructible auto n,const BigInt& a) {return BigInt(n)>a;}
+bool operator>(const BigInt& a, const BigIntConstructible auto &n) {return a>BigInt(n);}
+bool operator>(const BigIntConstructible auto &n, const BigInt& a) {return BigInt(n)>a;}
 
-bool operator<=(const BigInt& a, BigIntConstructible auto n) {return a<=BigInt(n);}
-bool operator<=(BigIntConstructible auto n,const BigInt& a) {return BigInt(n)<=a;}
+bool operator<=(const BigInt& a, const BigIntConstructible auto &n) {return a<=BigInt(n);}
+bool operator<=(const BigIntConstructible auto &n, const BigInt& a) {return BigInt(n)<=a;}
 
-bool operator>=(const BigInt& a, BigIntConstructible auto n) {return a>=BigInt(n);}
-bool operator>=(BigIntConstructible auto n,const BigInt& a) {return BigInt(n)>=a;}
+bool operator>=(const BigInt& a, const BigIntConstructible auto &n) {return a>=BigInt(n);}
+bool operator>=(const BigIntConstructible auto &n, const BigInt& a) {return BigInt(n)>=a;}
 
-bool operator==(const BigInt& a, BigIntConstructible auto n) {return a==BigInt(n);}
-bool operator==(BigIntConstructible auto n,const BigInt& a) {return BigInt(n)==a;}
+bool operator==(const BigInt& a, const BigIntConstructible auto &n) {return a==BigInt(n);}
+bool operator==(const BigIntConstructible auto &n, const BigInt& a) {return BigInt(n)==a;}
 
-bool operator!=(const BigInt& a, BigIntConstructible auto n) {return a!=BigInt(n);}
-bool operator!=(BigIntConstructible auto n,const BigInt& a) {return BigInt(n)!=a;}
+bool operator!=(const BigInt& a, const BigIntConstructible auto &n) {return a!=BigInt(n);}
+bool operator!=(const BigIntConstructible auto &n, const BigInt& a) {return BigInt(n)!=a;}

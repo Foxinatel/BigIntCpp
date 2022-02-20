@@ -5,8 +5,7 @@
 inline BigInt BigInt::operator+() const {return *this;}
 
 inline BigInt BigInt::operator-() const {
-    BigInt temp;
-    temp.value = value;
+    BigInt temp{*this};
     temp.negative = !temp.negative;
     return temp;
 }

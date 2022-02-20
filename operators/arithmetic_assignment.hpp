@@ -5,27 +5,27 @@
 #include "assignment.hpp"
 #include "binary_arithmetic.hpp"
 
-BigInt& BigInt::operator+=(BigIntConstructible auto a) {
-    *this = *this + BigInt(a);
+inline BigInt& BigInt::operator+=(const BigInt &a) {
+    *this = *this + a;
     return *this;
 }
 
-BigInt& BigInt::operator-=(BigIntConstructible auto a) {
-    *this = *this - BigInt(a);
+inline BigInt& BigInt::operator-=(const BigInt &a) {
+    *this = *this - a;
     return *this;
 }
 
-BigInt& BigInt::operator*=(BigIntConstructible auto a) {
-    *this = *this * BigInt(a);
+inline BigInt& BigInt::operator*=(const BigInt &a) {
+    *this = *this * a;
     return *this;
 }
 
-BigInt& BigInt::operator/=(BigIntConstructible auto a) {
-    *this = *this / BigInt(a);
+inline BigInt& BigInt::operator/=(const BigInt &a) {
+    *this = *this / a;
     return *this;
 }
 
-BigInt& BigInt::operator%=(BigIntConstructible auto a) {
-    *this = *this % BigInt(a);
+inline BigInt& BigInt::operator%=(const BigInt &a) {
+    *this = *this % a;
     return *this;
 }

@@ -2,8 +2,8 @@
 
 #include "../bigint.hpp"
 
-const BigInt& BigInt::operator=(BigIntConstructible auto a) {
-    value = a.value;
-    negative = a.negative;
+inline BigInt &BigInt::operator=(const BigInt &other) {
+    value = other.value;
+    negative = other.negative;
     return *this;
 }

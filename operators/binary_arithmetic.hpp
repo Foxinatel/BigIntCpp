@@ -6,14 +6,14 @@
 #include "../functions/functions.hpp"
 #include <cstddef>
 
-BigInt operator+(BigInt, BigInt);
-BigInt operator-(BigInt, BigInt);
-BigInt operator*(BigInt, BigInt);
-BigInt operator/(BigInt, BigInt);
-BigInt operator%(BigInt, BigInt);
+BigInt operator+(const BigInt &, const BigInt &);
+BigInt operator-(const BigInt &, const BigInt &);
+BigInt operator*(const BigInt &, const BigInt &);
+BigInt operator/(const BigInt &, const BigInt &);
+BigInt operator%(const BigInt &, const BigInt &);
 
 //ripple addition
-inline BigInt operator+(BigInt a, BigInt b) {
+inline BigInt operator+(const BigInt &a, const BigInt &b) {
     BigInt newval; 
     if (a.negative ^ b.negative) {
         newval = a-b;
@@ -35,26 +35,7 @@ inline BigInt operator+(BigInt a, BigInt b) {
     return newval;
 }
 
-//Definitely not optimal, will revisit later
-//I wonder if there's something like Wallace trees for this
-inline BigInt operator*(BigInt a, BigInt b) {
-    BigInt accumulator;
-    accumulator.negative = a.negative ^ b.negative;
-    for (size_t i = 0; i < a.value.size(); ++i) {
-        for (size_t j = 0; j < b.value.size(); ++j) {
-            BigInt temp;
-            temp.value.resize(i+j);
-            uint64_t val = uint64_t(a.value[i])*b.value[j];
-            if (val == 0) continue;
-            temp.value.push_back(val % (1l<<32));
-            if (val >> 32) temp.value.push_back(val >> 32);
-            accumulator += temp;
-        }
-    }
-    return accumulator;
-}
-
-inline BigInt operator-(BigInt a, BigInt b) {
+inline BigInt operator-(const BigInt &a, const BigInt &b) {
     BigInt newval;
     newval.negative = a.negative;
     if (a.negative ^ b.negative) {
@@ -78,7 +59,26 @@ inline BigInt operator-(BigInt a, BigInt b) {
     return newval;
 }
 
-inline BigInt operator/(BigInt N, BigInt D) {
+//Definitely not optimal, will revisit later
+//I wonder if there's something like Wallace trees for this
+inline BigInt operator*(const BigInt &a, const BigInt &b) {
+    BigInt accumulator;
+    accumulator.negative = a.negative ^ b.negative;
+    for (size_t i = 0; i < a.value.size(); ++i) {
+        for (size_t j = 0; j < b.value.size(); ++j) {
+            BigInt temp;
+            temp.value.resize(i+j);
+            uint64_t val = uint64_t(a.value[i])*b.value[j];
+            if (val == 0) continue;
+            temp.value.push_back(val % (1l<<32));
+            if (val >> 32) temp.value.push_back(val >> 32);
+            accumulator += temp;
+        }
+    }
+    return accumulator;
+}
+
+inline BigInt operator/(const BigInt &N, const BigInt &D) {
     BigInt Q, R;
     for (size_t i = 0; i < N.value.size()*32; ++i) {
         const size_t index = N.value.size()*32 - i - 1;
@@ -94,7 +94,7 @@ inline BigInt operator/(BigInt N, BigInt D) {
     return Q;
 }
 
-inline BigInt operator%(BigInt N, BigInt D) {
+inline BigInt operator%(const BigInt &N, const BigInt &D) {
     BigInt Q, R;
     for (size_t i = 0; i < N.value.size()*32; ++i) {
         const size_t index = N.value.size()*32 - i - 1;
@@ -110,17 +110,17 @@ inline BigInt operator%(BigInt N, BigInt D) {
     return R;
 }
 
-inline BigInt operator+(BigInt a, BigIntConstructible auto n) {return a + BigInt(n);}
-inline BigInt operator+(BigIntConstructible auto n, BigInt a) {return BigInt(n) + a;}
+inline BigInt operator+(const BigInt &a, const BigIntConstructible auto &n) {return a + BigInt(n);}
+inline BigInt operator+(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) + a;}
 
-inline BigInt operator*(BigInt a, BigIntConstructible auto n) {return a * BigInt(n);}
-inline BigInt operator*(BigIntConstructible auto n, BigInt a) {return BigInt(n) * a;}
+inline BigInt operator*(const BigInt &a, const BigIntConstructible auto &n) {return a * BigInt(n);}
+inline BigInt operator*(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) * a;}
 
-inline BigInt operator-(BigInt a, BigIntConstructible auto n) {return a - BigInt(n);}
-inline BigInt operator-(BigIntConstructible auto n, BigInt a) {return BigInt(n) - a;}
+inline BigInt operator-(const BigInt &a, const BigIntConstructible auto &n) {return a - BigInt(n);}
+inline BigInt operator-(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) - a;}
 
-inline BigInt operator/(BigInt a, BigIntConstructible auto n) {return a / BigInt(n);}
-inline BigInt operator/(BigIntConstructible auto n, BigInt a) {return BigInt(n) / a;}
+inline BigInt operator/(const BigInt &a, const BigIntConstructible auto &n) {return a / BigInt(n);}
+inline BigInt operator/(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) / a;}
 
-inline BigInt operator%(BigInt a, BigIntConstructible auto n) {return a % BigInt(n);}
-inline BigInt operator%(BigIntConstructible auto n, BigInt a) {return BigInt(n) % a;}
+inline BigInt operator%(const BigInt &a, const BigIntConstructible auto &n) {return a % BigInt(n);}
+inline BigInt operator%(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) % a;}

@@ -2,6 +2,6 @@
 
 #include "../bigint.hpp"
 
-inline BigInt::operator uint() {
+inline BigInt::operator uint32_t() {
     return value[0];
 }

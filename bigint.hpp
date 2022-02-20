@@ -7,13 +7,6 @@
 
 #include "utilities.hpp"
 
-struct BigInt;
-template<class T>
-concept BigIntConstructible = requires (T a) {BigInt(a);};
-
-inline BigInt operator*(BigInt a, BigIntConstructible auto n);
-inline BigInt operator*(BigIntConstructible auto n, BigInt a);
-
 //store in reverse order
 struct BigInt {
 
@@ -21,23 +14,24 @@ struct BigInt {
     std::vector<uint32_t> value;
 
     BigInt ();
+    BigInt(BigInt const&) = default;
     BigInt (const std::integral auto);
     BigInt (const char*);
     BigInt (const std::string);
 
     //Assignment
-    const BigInt& operator=(BigIntConstructible auto);
+    BigInt& operator=(const BigInt&);
 
     // Unary arithmetic operators:
     BigInt operator+() const;   // unary +
     BigInt operator-() const;   // unary -
 
     // Arithmetic-assignment operators:
-    BigInt& operator+=(BigIntConstructible auto);
-    BigInt& operator-=(BigIntConstructible auto);
-    BigInt& operator*=(BigIntConstructible auto);
-    BigInt& operator/=(BigIntConstructible auto);
-    BigInt& operator%=(BigIntConstructible auto);
+    BigInt& operator+=(const BigInt&);
+    BigInt& operator-=(const BigInt&);
+    BigInt& operator*=(const BigInt&);
+    BigInt& operator/=(const BigInt&);
+    BigInt& operator%=(const BigInt&);
 
     // Increment and decrement operators:
     BigInt& operator++();       // pre-increment
@@ -45,5 +39,8 @@ struct BigInt {
     BigInt operator++(int);     // post-increment
     BigInt operator--(int);     // post-decrement
 
-    operator uint();
+    operator uint32_t();
 };
+
+template<class T>
+concept BigIntConstructible = requires (T a) {BigInt(a);};
