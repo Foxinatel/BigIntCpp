@@ -1,10 +1,8 @@
 #pragma once
 
-#include "../utilities.hpp"
 #include "../bigint.hpp"
 #include "./relational.hpp"
 #include "../functions/functions.hpp"
-#include <cstddef>
 
 BigInt operator+(const BigInt &, const BigInt &);
 BigInt operator-(const BigInt &, const BigInt &);
@@ -21,7 +19,7 @@ inline BigInt operator+(const BigInt &a, const BigInt &b) {
     } else {
         const size_t size1 = a.value.size();
         const size_t size2 = b.value.size();
-        const size_t s = M_max(size1, size2);
+        const size_t s = std::max(size1, size2);
         bool overflow = false;
         for (size_t i = 0; i < s || overflow; ++i) {
             const uint64_t newdig = uint64_t(i < size1 ? a.value[i] : 0) +
@@ -44,8 +42,8 @@ inline BigInt operator-(const BigInt &a, const BigInt &b) {
         const BigInt absa = abs(a);
         const BigInt absb = abs(b);
         if (absb > absa) newval.negative = !newval.negative;
-        const BigInt max = M_max(absa, absb);
-        const BigInt min = M_min(absa, absb);
+        const BigInt max = std::max(absa, absb);
+        const BigInt min = std::min(absa, absb);
         bool underflow = false;
         for (size_t i = 0; i < max.value.size(); ++i) {
             const uint32_t newdig = max.value[i] -

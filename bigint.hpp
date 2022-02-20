@@ -5,8 +5,6 @@
 #include <string>
 #include <concepts>
 
-#include "utilities.hpp"
-
 //store in reverse order
 struct BigInt {
 
