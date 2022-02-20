@@ -6,13 +6,11 @@
 
 
 inline BigInt& BigInt::operator++() {
-    *this += 1;
-    return *this;
+    return *this += 1;
 }
 
 inline BigInt& BigInt::operator--() {
-    *this -= 1;
-    return *this;
+    return *this -= 1;
 }
 
 inline BigInt BigInt::operator++(int) {

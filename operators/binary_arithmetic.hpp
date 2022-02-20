@@ -57,8 +57,6 @@ inline BigInt operator-(const BigInt &a, const BigInt &b) {
     return newval;
 }
 
-//Definitely not optimal, will revisit later
-//I wonder if there's something like Wallace trees for this
 inline BigInt operator*(const BigInt &a, const BigInt &b) {
     BigInt accumulator;
     accumulator.negative = a.negative ^ b.negative;
@@ -91,8 +89,6 @@ inline BigInt operator/(const BigInt &N, const BigInt &D) {
     }
     return Q;
 }
-
-#include <iostream>
 
 inline BigInt operator%(const BigInt &N, const BigInt &D) {
     BigInt Q, R;

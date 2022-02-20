@@ -14,10 +14,11 @@ inline BigInt::BigInt (std::integral auto n) {
     }
     while (n > 0) {
         value.push_back(n % (1l << 32));
-        n /= (1l << 32); //after my time in Haskell, I can never look at >>= the same way again
+        n /= (1l << 32);
     }
 }
 
+//constructor for char pointers
 inline BigInt::BigInt(const char *chars) : BigInt(std::string(chars)) {}
 
 //constructor for strings

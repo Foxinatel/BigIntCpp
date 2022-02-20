@@ -5,26 +5,21 @@
 #include "binary_arithmetic.hpp"
 
 inline BigInt& BigInt::operator+=(const BigInt &a) {
-    *this = *this + a;
-    return *this;
+    return *this = *this + a;
 }
 
 inline BigInt& BigInt::operator-=(const BigInt &a) {
-    *this = *this - a;
-    return *this;
+    return *this = *this - a;
 }
 
 inline BigInt& BigInt::operator*=(const BigInt &a) {
-    *this = *this * a;
-    return *this;
+    return *this = *this * a;
 }
 
 inline BigInt& BigInt::operator/=(const BigInt &a) {
-    *this = *this / a;
-    return *this;
+    return *this = *this / a;
 }
 
 inline BigInt& BigInt::operator%=(const BigInt &a) {
-    *this = *this % a;
-    return *this;
+    return *this = *this % a;
 }
