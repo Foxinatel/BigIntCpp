@@ -39,8 +39,8 @@ inline BigInt operator-(const BigInt &a, const BigInt &b) {
     if (a.negative ^ b.negative) {
         newval = a+b;
     } else {
-        const BigInt absa = BIabs(a);
-        const BigInt absb = BIabs(b);
+        const BigInt absa = abs(a);
+        const BigInt absb = abs(b);
         if (absb > absa) newval.negative = !newval.negative;
         const BigInt max = std::max(absa, absb);
         const BigInt min = std::min(absa, absb);

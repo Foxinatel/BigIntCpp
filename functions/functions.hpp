@@ -2,7 +2,7 @@
 
 #include "../bigint.hpp"
 
-inline BigInt BIabs(BigInt a) {
+inline BigInt abs(BigInt a) {
     a.negative = 0;
     return a;
 }

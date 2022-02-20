@@ -17,12 +17,12 @@ inline BigInt& BigInt::operator--() {
 
 inline BigInt BigInt::operator++(int) {
     BigInt temp = *this;
-    *this += 1;
+    ++*this;
     return temp;
 }
 
 inline BigInt BigInt::operator--(int) {
     BigInt temp = *this;
-    *this -= 1;
+    --*this;
     return temp;
 }
