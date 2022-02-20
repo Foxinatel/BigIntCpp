@@ -13,9 +13,9 @@ BigInt operator%(const BigInt &, const BigInt &);
 //ripple addition
 inline BigInt operator+(const BigInt &a, const BigInt &b) {
     BigInt newval; 
-    if (a.negative ^ b.negative) {
-        newval = a-b;
-        newval.negative = a.negative;
+    if (a.sign * b.sign < 0) {
+        newval = a - b;
+        newval.sign = a.sign;
     } else {
         const size_t size1 = a.value.size();
         const size_t size2 = b.value.size();
@@ -28,20 +28,20 @@ inline BigInt operator+(const BigInt &a, const BigInt &b) {
             newval.value.push_back(newdig);
             overflow = newdig >> 32;
         }
-        newval.negative = a.negative;
+        newval.sign = a.sign;
     }
     return newval;
 }
 
 inline BigInt operator-(const BigInt &a, const BigInt &b) {
     BigInt newval;
-    newval.negative = a.negative;
-    if (a.negative ^ b.negative) {
-        newval = a+b;
+    newval.sign = a.sign;
+    if (a.sign * b.sign < 0) {
+        newval = a + b;
     } else {
         const BigInt absa = abs(a);
         const BigInt absb = abs(b);
-        if (absb > absa) newval.negative = !newval.negative;
+        if (absb > absa) newval.sign *= -1;
         const BigInt max = std::max(absa, absb);
         const BigInt min = std::min(absa, absb);
         bool underflow = false;
@@ -59,7 +59,7 @@ inline BigInt operator-(const BigInt &a, const BigInt &b) {
 
 inline BigInt operator*(const BigInt &a, const BigInt &b) {
     BigInt accumulator;
-    accumulator.negative = a.negative ^ b.negative;
+    accumulator.sign = a.sign * b.sign;
     for (size_t i = 0; i < a.value.size(); ++i) {
         for (size_t j = 0; j < b.value.size(); ++j) {
             BigInt temp;

@@ -9,7 +9,7 @@ inline BigInt::BigInt () {}
 //constructor for integer values
 inline BigInt::BigInt (std::integral auto n) {
     if (n < 0) {
-        negative = true;
+        sign = -1;
         n = -n;
     }
     while (n > 0) {
@@ -22,9 +22,14 @@ inline BigInt::BigInt (std::integral auto n) {
 inline BigInt::BigInt(const char *chars) : BigInt(std::string(chars)) {}
 
 //constructor for strings
-inline BigInt::BigInt (const std::string str) {
-    if (str[0] == '-') negative = true;
-    const std::string numstr = negative ? str.substr(1) : str;
+inline BigInt::BigInt (const std::string &str) {
+    std::string numstr;
+    if (str[0] == '-') {
+        sign = -1;
+        numstr = str.substr(1);
+    } else {
+        numstr = str;
+    }
     BigInt acc;
     for (size_t i = 0; i < numstr.length(); ++i) {
         acc *= 10;

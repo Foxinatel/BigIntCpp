@@ -3,6 +3,6 @@
 #include "../bigint.hpp"
 
 inline BigInt abs(BigInt a) {
-    a.negative = 0;
+    a.sign = 1;
     return a;
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <compare>
 #include <cstdint>
 #include <vector>
 #include <string>
@@ -8,14 +9,14 @@
 //store in reverse order
 struct BigInt {
 
-    bool negative = 0;
+    int sign = 1;
     std::vector<uint32_t> value;
 
     BigInt ();
     BigInt(BigInt const&) = default;
     BigInt (std::integral auto);
     BigInt (const char*);
-    BigInt (const std::string);
+    BigInt (const std::string&);
 
     //Assignment
     BigInt& operator=(const BigInt&);
@@ -36,6 +37,14 @@ struct BigInt {
     BigInt& operator--();       // pre-decrement
     BigInt operator++(int);     // post-increment
     BigInt operator--(int);     // post-decrement
+
+    std::strong_ordering operator<=>(const BigInt&) const;
+    bool operator>(const BigInt&) const = default;
+    bool operator<(const BigInt&) const = default;
+    bool operator>=(const BigInt&) const = default;
+    bool operator<=(const BigInt&) const = default;
+    bool operator==(const BigInt&) const = default;
+    bool operator!=(const BigInt&) const = default;
 
     explicit operator uint32_t();
 };

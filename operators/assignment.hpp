@@ -4,6 +4,6 @@
 
 inline BigInt &BigInt::operator=(const BigInt &other) {
     value = other.value;
-    negative = other.negative;
+    sign = other.sign;
     return *this;
 }

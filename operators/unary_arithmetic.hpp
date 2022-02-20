@@ -6,6 +6,6 @@ inline BigInt BigInt::operator+() const {return *this;}
 
 inline BigInt BigInt::operator-() const {
     BigInt temp{*this};
-    temp.negative = !temp.negative;
+    temp.sign = -temp.sign;
     return temp;
 }
