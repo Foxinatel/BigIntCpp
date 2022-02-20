@@ -108,17 +108,17 @@ inline BigInt operator%(const BigInt &N, const BigInt &D) {
     return R;
 }
 
-inline BigInt operator+(const BigInt &a, const BigIntConstructible auto &n) {return a + BigInt(n);}
-inline BigInt operator+(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) + a;}
+BigInt operator+(const BigInt &a, const BigIntConstructible auto &n) {return a + BigInt(n);}
+BigInt operator+(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) + a;}
 
-inline BigInt operator*(const BigInt &a, const BigIntConstructible auto &n) {return a * BigInt(n);}
-inline BigInt operator*(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) * a;}
+BigInt operator*(const BigInt &a, const BigIntConstructible auto &n) {return a * BigInt(n);}
+BigInt operator*(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) * a;}
 
-inline BigInt operator-(const BigInt &a, const BigIntConstructible auto &n) {return a - BigInt(n);}
-inline BigInt operator-(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) - a;}
+BigInt operator-(const BigInt &a, const BigIntConstructible auto &n) {return a - BigInt(n);}
+BigInt operator-(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) - a;}
 
-inline BigInt operator/(const BigInt &a, const BigIntConstructible auto &n) {return a / BigInt(n);}
-inline BigInt operator/(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) / a;}
+BigInt operator/(const BigInt &a, const BigIntConstructible auto &n) {return a / BigInt(n);}
+BigInt operator/(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) / a;}
 
-inline BigInt operator%(const BigInt &a, const BigIntConstructible auto &n) {return a % BigInt(n);}
-inline BigInt operator%(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) % a;}
+BigInt operator%(const BigInt &a, const BigIntConstructible auto &n) {return a % BigInt(n);}
+BigInt operator%(const BigIntConstructible auto &n, const BigInt &a) {return BigInt(n) % a;}

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../utilities.hpp"
 #include "../bigint.hpp"
 #include "assignment.hpp"
 #include "binary_arithmetic.hpp"
