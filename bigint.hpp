@@ -13,7 +13,7 @@ struct BigInt {
 
     BigInt ();
     BigInt(BigInt const&) = default;
-    BigInt (const std::integral auto);
+    BigInt (std::integral auto);
     BigInt (const char*);
     BigInt (const std::string);
 
@@ -37,8 +37,5 @@ struct BigInt {
     BigInt operator++(int);     // post-increment
     BigInt operator--(int);     // post-decrement
 
-    operator uint32_t();
+    explicit operator uint32_t();
 };
-
-template<class T>
-concept BigIntConstructible = requires (T a) {BigInt(a);};

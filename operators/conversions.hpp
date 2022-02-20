@@ -3,5 +3,5 @@
 #include "../bigint.hpp"
 
 inline BigInt::operator uint32_t() {
-    return value[0];
+    return value.size() ? value[0] : 0;
 }

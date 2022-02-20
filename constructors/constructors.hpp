@@ -7,12 +7,14 @@
 inline BigInt::BigInt () {}
 
 //constructor for integer values
-inline BigInt::BigInt (const std::integral auto n) {
-    if (n < 0) negative = true;
-    auto absn = M_abs(n);
-    while (absn > 0) {
-        value.push_back(absn % (1l << 32));
-        absn /= (1l << 32); //after my time in Haskell, I can never look at >>= the same way again
+inline BigInt::BigInt (std::integral auto n) {
+    if (n < 0) {
+        negative = true;
+        n = -n;
+    }
+    while (n > 0) {
+        value.push_back(n % (1l << 32));
+        n /= (1l << 32); //after my time in Haskell, I can never look at >>= the same way again
     }
 }
 
