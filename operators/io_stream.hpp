@@ -5,11 +5,13 @@
 #include "./binary_arithmetic.hpp"
 
 inline std::ostream& operator<<(std::ostream &out, BigInt num) {
-    //if (num.value.size() == 0) num.value = {0};
-    std::string str = (num.negative?"-":"");
+    if (num.value.size() == 0) num.value = {0};
+    std::string str = "";
+    bool negflag = num.negative;
     while (num.value.size()) {
         str.insert(0, 1, char(num % 10 + '0'));
         num /= 10;
     }
+    str.insert(0,negflag?"-":"");
     return out << str;
 }
